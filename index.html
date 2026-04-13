@@ -1,3 +1,4 @@
+```html
 <!doctype html>
 <html lang="en">
 <head>
@@ -5,39 +6,149 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Vindhil Luxury Wedding Cars — Invoice Generator</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/modern-normalize/modern-normalize.css">
+
   <style>
-    :root{--accent:#2b6cb0;--muted:#6b7280}
-    body{font-family:Inter,system-ui,Segoe UI,Roboto,Arial;color:#111;margin:0;padding:24px;background:#f7fafc}
+    :root{
+      --accent:#c9a646;
+      --dark:#0b0b0b;
+      --muted:#a1a1aa;
+    }
+
+    body{
+      font-family:Inter,system-ui,Segoe UI,Roboto,Arial;
+      color:#f5f5f5;
+      margin:0;
+      padding:24px;
+      background:linear-gradient(135deg,#0b0b0b,#1a1a1a);
+    }
+
     .container{max-width:1000px;margin:0 auto}
-    h1{margin:0 0 12px;font-size:20px}
+
+    h1{
+      margin:0 0 12px;
+      font-size:22px;
+      color:var(--accent);
+    }
+
+    h2, h3{ color:var(--accent); }
+
     .grid{display:grid;gap:12px}
     .row{display:flex;gap:12px}
-    input,select,textarea{padding:8px;border:1px solid #e2e8f0;border-radius:6px;font-size:14px}
-    label{font-size:13px;color:var(--muted);display:block;margin-bottom:6px}
-    .card{background:white;padding:16px;border-radius:10px;box-shadow:0 6px 18px rgba(7,10,20,0.06)}
+
+    input,select,textarea{
+      padding:8px;
+      border:1px solid #333;
+      border-radius:6px;
+      font-size:14px;
+      background:#111;
+      color:#fff;
+    }
+
+    input::placeholder, textarea::placeholder{ color:#777; }
+
+    label{
+      font-size:13px;
+      color:#d4d4d8;
+      display:block;
+      margin-bottom:6px
+    }
+
+    .card{
+      background:#111;
+      padding:16px;
+      border-radius:12px;
+      border:1px solid rgba(201,166,70,0.25);
+      box-shadow:0 10px 30px rgba(0,0,0,0.6);
+    }
+
     .flex{display:flex;gap:12px;align-items:center}
     .spacer{flex:1}
+
     table{width:100%;border-collapse:collapse}
-    th,td{padding:6px;border-bottom:1px solid #eef2f7;font-size:13px}
-    th{background:#f1f5f9;text-align:left}
-    .btn{background:var(--accent);color:white;padding:8px 12px;border-radius:8px;border:none;cursor:pointer}
-    .btn.ghost{background:transparent;color:var(--accent);border:1px solid #cfe3ff}
+
+    th,td{
+      padding:8px;
+      border-bottom:1px solid #222;
+      font-size:13px;
+      color:#e5e5e5;
+    }
+
+    th{
+      background:#1a1a1a;
+      color:var(--accent);
+      text-transform:uppercase;
+      font-size:12px;
+    }
+
+    .btn{
+      background:linear-gradient(135deg,#c9a646,#a8832f);
+      color:black;
+      padding:8px 14px;
+      border-radius:8px;
+      border:none;
+      cursor:pointer;
+      font-weight:600;
+    }
+
+    .btn.ghost{
+      background:transparent;
+      color:var(--accent);
+      border:1px solid var(--accent);
+    }
+
     .muted{color:var(--muted)}
-    .invoice-preview{background:white;padding:20px;border-radius:8px}
-    .invoice-head{display:flex;justify-content:space-between;align-items:flex-start}
-    .invoice-meta{font-size:13px;color:var(--muted)}
+
+    .invoice-preview{
+      background:white;
+      color:black;
+      padding:20px;
+      border-radius:8px;
+    }
+
+    .invoice-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+    }
+
+    .invoice-meta{
+      font-size:13px;
+      color:#555;
+    }
+
     .right{text-align:right}
+
     .totals{margin-top:12px}
-    .totals .line{display:flex;justify-content:space-between;padding:6px 0}
+
+    .totals .line{
+      display:flex;
+      justify-content:space-between;
+      padding:6px 0;
+    }
+
     .small{font-size:13px}
-    .controls{display:flex;gap:8px;flex-wrap:wrap}
-    .danger{background:#ef4444}
-    footer{margin-top:18px;font-size:13px;color:var(--muted)}
-    #pdfContent { background:white; padding:20px; border-radius:8px; width:100%; box-sizing:border-box; }
+
+    footer{
+      margin-top:18px;
+      font-size:13px;
+      color:#999;
+    }
+
+    #pdfContent{
+      background:white;
+      padding:20px;
+      border-radius:8px;
+      width:100%;
+      box-sizing:border-box;
+    }
+
     @media (min-width:900px){.grid-2{grid-template-columns:1fr 420px}}
     @media (max-width:899px){.row{flex-direction:column}}
   </style>
 </head>
+
+
+
 <body>
   <div class="container">
     <h1>Vindhil Luxury Wedding Cars — Invoice Generator</h1>
@@ -201,44 +312,74 @@ Email: vindhil.group@gmail.com</textarea>
         </tr>`;
       }).join('');
 
-      previewDiv.innerHTML = `
-        <div style="text-align: center; margin-bottom: 20px;">
-          <img src="vindil_logo.png" alt="Vindhil Luxury Wedding Cars Logo" style="width: 120px; height: auto;">
-        </div>
-        <div class="invoice-head">
-          <div>
-            <strong style="font-size:18px">${escapeHtml(data.companyName)}</strong>
-            <div class="invoice-meta">${nl2br(escapeHtml(data.companyAddress))}</div>
-          </div>
-          <div class="right">
-            <div style="font-weight:600">Invoice</div>
-            <div class="invoice-meta">No: ${escapeHtml(data.invoiceNo)}<br/>Date: ${escapeHtml(data.invoiceDate)}</div>
-          </div>
-        </div>
-        <hr style="margin:12px 0"/>
-        <div style="display:flex;justify-content:space-between;padding:6px 0">
-          <div>
-            <div class="small muted">Bill to</div>
-            <div style="font-weight:600">${escapeHtml(data.customerName)}</div>
-            <div class="invoice-meta">${nl2br(escapeHtml(data.customerAddress))}</div>
-          </div>
-          <div class="right">
-            <div class="small muted">Currency</div>
-            <div style="font-weight:600">${data.currency}</div>
-          </div>
-        </div>
-        <table style="margin-top:8px">
-          <thead><tr><th style="width:60%">Description</th><th>Qty</th><th>Unit</th><th class="right">Line total</th></tr></thead>
-          <tbody>${rowsHtml}</tbody>
-        </table>
-        <div class="totals">
-          <div class="line"><div class="muted">Sub total</div><div>${formatMoney(t.sub,data.currency)}</div></div>
-          <div class="line"><div class="muted">Tax total</div><div>${formatMoney(t.taxTotal,data.currency)}</div></div>
-          <div class="line"><div class="muted">Discount</div><div>-${formatMoney(t.discount,data.currency)}</div></div>
-          <div class="line" style="font-weight:700;font-size:16px"><div>Total</div><div>${formatMoney(t.total,data.currency)}</div></div>
-        </div>
-        <div style="margin-top:12px" class="muted small">${nl2br(escapeHtml(data.notes))}</div>
-      `;
+previewDiv.innerHTML = `
+  <div style="background:#0b0b0b;color:#f5f5f5;padding:25px;border-radius:10px;font-family:Arial">
+
+    <div style="text-align:center;margin-bottom:20px;">
+      <img src="vindil_logo.png" style="width:100px;"><br>
+      <span style="color:#c9a646;font-size:20px;font-weight:bold;">
+        ${escapeHtml(data.companyName)}
+      </span>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;border-bottom:1px solid #c9a646;padding-bottom:10px;margin-bottom:15px;">
+      <div>
+        <div style="color:#c9a646;font-weight:bold;">Invoice To</div>
+        <div style="font-size:14px">${escapeHtml(data.customerName)}</div>
+        <div style="font-size:13px;color:#aaa">${nl2br(escapeHtml(data.customerAddress))}</div>
+      </div>
+
+      <div style="text-align:right">
+        <div style="font-size:22px;color:#c9a646;font-weight:bold;">INVOICE</div>
+        <div style="font-size:13px">No: ${escapeHtml(data.invoiceNo)}</div>
+        <div style="font-size:13px">Date: ${escapeHtml(data.invoiceDate)}</div>
+      </div>
+    </div>
+
+    <table style="width:100%;border-collapse:collapse;margin-top:10px;">
+      <thead>
+        <tr style="background:#1a1a1a;color:#c9a646;">
+          <th style="padding:8px;text-align:left;">Description</th>
+          <th style="padding:8px;">Qty</th>
+          <th style="padding:8px;">Unit</th>
+          <th style="padding:8px;text-align:right;">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${rowsHtml}
+      </tbody>
+    </table>
+
+    <div style="margin-top:20px;border-top:1px solid #333;padding-top:10px;">
+      <div style="display:flex;justify-content:space-between;">
+        <span>Sub Total</span>
+        <span>${formatMoney(t.sub,data.currency)}</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;">
+        <span>Tax</span>
+        <span>${formatMoney(t.taxTotal,data.currency)}</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;">
+        <span>Discount</span>
+        <span>-${formatMoney(t.discount,data.currency)}</span>
+      </div>
+
+      <div style="display:flex;justify-content:space-between;margin-top:10px;font-size:18px;font-weight:bold;color:#c9a646;">
+        <span>Total</span>
+        <span>${formatMoney(t.total,data.currency)}</span>
+      </div>
+    </div>
+
+    <div style="margin-top:20px;font-size:12px;color:#aaa;">
+      ${nl2br(escapeHtml(data.notes))}
+    </div>
+
+    <div style="margin-top:15px;text-align:center;font-size:12px;color:#666;">
+      Thank you for choosing Vindhil Luxury Wedding Cars ✨
+    </div>
+
+  </div>
+`;
     }
 
     function nl2br(s){return s.replace(/\n/g,'<br/>');}
