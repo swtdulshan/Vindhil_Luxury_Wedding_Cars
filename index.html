@@ -135,12 +135,12 @@
     }
 
     #pdfContent{
-      background:white;
-      padding:20px;
-      border-radius:8px;
-      width:100%;
-      box-sizing:border-box;
-    }
+        background:#0b0b0b;  /* 🔥 force black */
+        padding:0;           /* 🔥 remove white spacing */
+        border-radius:0;
+         width:100%;
+        box-sizing:border-box;
+      }
 
     @media (min-width:900px){.grid-2{grid-template-columns:1fr 420px}}
     @media (max-width:899px){.row{flex-direction:column}}
@@ -388,16 +388,27 @@ previewDiv.innerHTML = `
     previewBtn.addEventListener('click', ()=>renderPreview());
 
     downloadBtn.addEventListener('click', ()=>{
-      renderPreview();
-      const opt = {
-        margin: 10,
-        filename: `${document.getElementById('invoiceNo').value || 'invoice'}.pdf`,
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2, scrollY: 0 }, // ensures all content is captured
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-      };
-      html2pdf().set(opt).from(pdfContent).save();
-    });
+  renderPreview();
+
+  const opt = {
+    margin: 0, // 🔥 remove white margins
+    filename: `${document.getElementById('invoiceNo').value || 'invoice'}.pdf`,
+    image: { type: 'jpeg', quality: 1 },
+    html2canvas: { 
+  scale: 2, 
+  scrollY: 0,
+  backgroundColor: '#0b0b0b' // 🔥 force black page
+},
+    jsPDF: { 
+      unit: 'mm', 
+      format: 'a4', 
+      orientation: 'portrait' 
+    }
+  };
+
+  html2pdf().set(opt).from(pdfContent).save();
+});
+
   </script>
 </body>
 </html>
